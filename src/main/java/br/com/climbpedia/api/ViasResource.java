@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,32 +26,30 @@ public class ViasResource {
 		
 	@Inject
 	private EntityManager em;
-
+	
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVia(@PathParam("id") Long id) {
+
     	ViaDAO viaDAO = new ViaDAO(em);
-        Via dados = viaDAO.getVia(id);
-        
+        Via via = viaDAO.getVia(id);
+
         return Response.status(200)
-        		.entity(dados)
+        		.entity(via)
         		.build();
     }
     
     @POST
+    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public static Response createVia(Via viaData) {
-//    	List<String> dados = new ArrayList<String>();
-//    	dados = Arrays.asList(viaData.split(","));
-//    	String[] dados = viaData.split("\\|");
-//    	Via via = new Via(dados[0], dados[1], dados[2]);
-    	Via via = new Via();
-    	
+    public Response insertVia(Via viaRequest) {
+    	ViaDAO viaDAO = new ViaDAO(em);
+    	Via via = viaDAO.insertVia(viaRequest);    	
+
     	return Response.status(200)
-    			.entity(via)
-    			.build();
+    			.entity(via).build();
     			
     }
     

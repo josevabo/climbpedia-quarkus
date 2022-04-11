@@ -3,6 +3,7 @@ package br.com.climbpedia.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,7 +11,8 @@ import javax.persistence.Table;
 @Table(name="vias")
 public class Via {
 	
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
@@ -130,6 +132,10 @@ public class Via {
 	public void setConquistador(Long conquistador) {
 		this.conquistador = conquistador;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Via -> nome: " + this.getNome();
+	}
 
 }
