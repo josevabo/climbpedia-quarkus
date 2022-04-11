@@ -1,7 +1,8 @@
 package br.com.climbpedia.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import br.com.climbpedia.model.Via;
@@ -20,12 +21,32 @@ public class ViaDAO {
 				.getSingleResult();
 	}
 	
-	@Transactional
 	public Via insertVia(Via via) {
 		System.out.println(via.toString());
 		em.persist(via);
 		
 		return via;
+	}
+
+	public List<Via> getAllVias() {
+		List<Via> allVias = em.createQuery("SELECT via FROM Via via", Via.class).getResultList();
+		return allVias;
+	}
+
+	public Via deleteViaById(Long id) {
+		Via via = new Via();
+
+		try {
+			via = em.createQuery("SELECT via FROM Via via WHERE via.id = :id", Via.class)
+					.setParameter("id", id).getSingleResult();
+
+			em.remove(via);			
+		} catch (Exception e ) {
+			System.out.println("Exception ao deletar via ->" + e.getMessage());
+			return null;
+		}
+
+		return via;		
 	}
 	
 }

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -40,6 +41,18 @@ public class ViasResource {
         		.build();
     }
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getaAllVias() {
+
+    	ViaDAO viaDAO = new ViaDAO(em);
+        List<Via> allVias = viaDAO.getAllVias();
+
+        return Response.status(200)
+        		.entity(allVias)
+        		.build();
+    }
+    
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,5 +66,17 @@ public class ViasResource {
     			
     }
     
-//    public static Response insertVia(Json) {}
+    @DELETE
+    @Transactional
+    @Path("{id}")
+    public Response deleteById(@PathParam("id") Long id) {
+    	ViaDAO viaDAO = new ViaDAO(em);
+    	Via via = viaDAO.deleteViaById(id);
+    	    	
+    	if (via != null) {
+    		return Response.status(200).entity("Via deletada com sucesso: " + via.toString()).build();
+    	}
+    	return Response.status(404).entity("Via informada não existe: Id " + id.toString()).build();
+    }
+    
 }
