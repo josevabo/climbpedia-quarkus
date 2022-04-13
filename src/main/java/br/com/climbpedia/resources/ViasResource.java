@@ -1,4 +1,4 @@
-package br.com.climbpedia.api;
+package br.com.climbpedia.resources;
 
 
 
