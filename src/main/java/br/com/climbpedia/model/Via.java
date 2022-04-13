@@ -1,5 +1,6 @@
 package br.com.climbpedia.model;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,15 +39,12 @@ public class Via {
 	
 	private String descricao;
 	
+	@Column(name = "dt_conquista")
+	private LocalDate dtConquista;
 	
+	private Short extensao;
 	
 	public Via() {}
-
-//	public Via(String nome, String graduacao, String descricao) {
-//		this.nome = nome;
-//		this.graduacao = graduacao;
-//		this.descricao = descricao;
-//	}
 	
 	public Long getId() {
 		return id;
@@ -131,6 +129,22 @@ public class Via {
 	@Override
 	public String toString() {
 		return "Via -> nome: " + this.getNome();
+	}
+	
+	public LocalDate getDtConquista() {
+		return dtConquista;
+	}
+
+	public void setDtConquista(LocalDate dtConquista) {
+		this.dtConquista = dtConquista;
+	}
+
+	public Short getExtensao() {
+		return extensao;
+	}
+
+	public void setExtensao(Short extensao) {
+		this.extensao = extensao;
 	}
 	
 	public Map<String, String> validaCamposObrigatorios() {

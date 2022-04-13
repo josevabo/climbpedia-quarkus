@@ -45,15 +45,10 @@ public class ViaDAO {
 	public Via deleteViaById(Long id) {
 		Via via = new Via();
 
-		try {
-			via = em.createQuery("SELECT via FROM Via via WHERE via.id = :id", Via.class)
-					.setParameter("id", id).getSingleResult();
+		via = em.createQuery("SELECT via FROM Via via WHERE via.id = :id", Via.class)
+				.setParameter("id", id).getSingleResult();
 
-			em.remove(via);			
-		} catch (Exception e ) {
-			System.out.println("Exception ao deletar via ->" + e.getMessage());
-			return null;
-		}
+		em.remove(via);			
 
 		return via;		
 	}

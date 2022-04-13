@@ -74,7 +74,7 @@ public class ViasResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertVia(Via viaRequest) {
     	HashMap<String, String> erros = (HashMap<String, String>) viaRequest.validaCamposObrigatorios();
-    	
+    	System.out.println(viaRequest.getDtConquista());
     	if (!erros.isEmpty()) {
     		Map<String, Map> retorno = new HashMap<String, Map>();
     		retorno.put("Ocorreu erro(s) na validação dos dados:", erros);
@@ -138,17 +138,22 @@ public class ViasResource {
     @Transactional
     @Path("{id}")
     public Response deleteById(@PathParam("id") Long id) {
-    	ViaDAO viaDAO = new ViaDAO(em);
-    	Via via = viaDAO.deleteViaById(id);
-    	    	
-    	if (via != null) {
-    		return Response.ok()
-    				.entity("Via deletada com sucesso: " + via.toString())
-    				.build();
-    	}
-    	return Response.status(Response.Status.NOT_FOUND)
-    			.entity("Via informada não existe: Id " + id.toString())
-    			.build();
+    	Via via = new Via();
+    	
+    	try {
+    		ViaDAO viaDAO = new ViaDAO(em);
+    		via = viaDAO.deleteViaById(id);
+
+		} catch (Exception e) {
+	    	return Response.status(Response.Status.NOT_FOUND)
+	    			.entity("Via informada não existe: Id " + id.toString())
+	    			.build();
+		}
+    	
+		return Response.ok()
+				.entity("Via deletada com sucesso: " + via.toString())
+				.build();
+
     }
     
 }
