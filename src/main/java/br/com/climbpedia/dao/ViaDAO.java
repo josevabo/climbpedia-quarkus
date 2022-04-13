@@ -1,6 +1,7 @@
 package br.com.climbpedia.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -14,24 +15,32 @@ public class ViaDAO {
 		this.em = em;
 	}
 	
-	public Via getVia(Long id) {
+	public Via getViaById(Long id) {
         
 		return em.createQuery("SELECT via FROM Via via WHERE via.id = :id", Via.class)
 				.setParameter("id", id)
 				.getSingleResult();
 	}
 	
+	public List<Via> getAllVias() {
+		List<Via> allVias = em.createQuery("SELECT via FROM Via via", Via.class).getResultList();
+		
+		return allVias;
+	}
+	
 	public Via insertVia(Via via) {
-		System.out.println(via.toString());
+
 		em.persist(via);
 		
 		return via;
 	}
-
-	public List<Via> getAllVias() {
-		List<Via> allVias = em.createQuery("SELECT via FROM Via via", Via.class).getResultList();
-		return allVias;
+	
+	public Via updateVia(Via via) {
+		em.merge(via);
+		
+		return via;
 	}
+
 
 	public Via deleteViaById(Long id) {
 		Via via = new Via();

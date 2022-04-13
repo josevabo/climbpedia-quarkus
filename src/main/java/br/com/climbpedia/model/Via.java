@@ -1,5 +1,8 @@
 package br.com.climbpedia.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,20 +42,12 @@ public class Via {
 	
 	public Via() {}
 
-	public Via(String nome, String graduacao, String descricao) {
-//		this.id = id;
-		this.nome = nome;
-		this.graduacao = graduacao;
-		this.descricao = descricao;
-	}
+//	public Via(String nome, String graduacao, String descricao) {
+//		this.nome = nome;
+//		this.graduacao = graduacao;
+//		this.descricao = descricao;
+//	}
 	
-	public Via(Long id, String nome, String graduacao, String descricao) {
-		this.id = id;
-		this.nome = nome;
-		this.graduacao = graduacao;
-		this.descricao = descricao;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -136,6 +131,22 @@ public class Via {
 	@Override
 	public String toString() {
 		return "Via -> nome: " + this.getNome();
+	}
+	
+	public Map<String, String> validaCamposObrigatorios() {
+		Map<String, String> erros = new HashMap<String, String>();
+		
+		if (this.nome.isBlank()) {
+			erros.put("nome", "Nome deve ser preenchido");
+		}
+		if (this.descricao.isBlank()) {
+			erros.put("descricao", "Descrição deve ser preenchida");
+		}
+		if (this.graduacao.isBlank()) {
+			erros.put("graduacao", "Graduação deve ser preenchida");
+		}
+		
+		return erros; 
 	}
 
 }
