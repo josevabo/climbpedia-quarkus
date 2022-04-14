@@ -1,5 +1,6 @@
 package br.com.climbpedia.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class ViaDAO {
 	}
 	
 	public Via updateVia(Via via) {
+
 		em.merge(via);
 		
 		return via;
@@ -52,5 +54,6 @@ public class ViaDAO {
 
 		return via;		
 	}
+	
 	
 }

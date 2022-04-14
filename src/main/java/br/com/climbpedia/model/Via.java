@@ -147,20 +147,5 @@ public class Via {
 		this.extensao = extensao;
 	}
 	
-	public Map<String, String> validaCamposObrigatorios() {
-		Map<String, String> erros = new HashMap<String, String>();
-		
-		if (this.nome.isBlank()) {
-			erros.put("nome", "Nome deve ser preenchido");
-		}
-		if (this.descricao.isBlank()) {
-			erros.put("descricao", "Descrição deve ser preenchida");
-		}
-		if (this.graduacao.isBlank()) {
-			erros.put("graduacao", "Graduação deve ser preenchida");
-		}
-		
-		return erros; 
-	}
 
 }

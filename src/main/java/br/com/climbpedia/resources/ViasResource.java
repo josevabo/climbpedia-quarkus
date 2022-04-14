@@ -73,8 +73,8 @@ public class ViasResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertVia(Via viaRequest) {
-    	HashMap<String, String> erros = (HashMap<String, String>) viaRequest.validaCamposObrigatorios();
-    	System.out.println(viaRequest.getDtConquista());
+    	HashMap<String, String> erros = (HashMap<String, String>) this.validaCamposObrigatorios(viaRequest, "insert");
+    	
     	if (!erros.isEmpty()) {
     		Map<String, Map> retorno = new HashMap<String, Map>();
     		retorno.put("Ocorreu erro(s) na validação dos dados:", erros);
@@ -106,7 +106,7 @@ public class ViasResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateVia(Via viaRequest) {
     	
-    	Map<String, String> erros = viaRequest.validaCamposObrigatorios();
+    	Map<String, String> erros = this.validaCamposObrigatorios(viaRequest, "update");
 
     	if (viaRequest.getId() == null) erros.put("id", "id deve ser informado");
     	
@@ -155,5 +155,30 @@ public class ViasResource {
 				.build();
 
     }
+    
+	private Map<String, String> validaCamposObrigatorios(Via via, String op) {
+		// operacao = "insert" || "update"
+		Map<String, String> erros = new HashMap<String, String>();
+		String nome = via.getNome();
+		System.out.println(nome);
+		String descricao = via.getDescricao();
+		System.out.println(descricao);
+		String graduacao = via.getGraduacao();
+		System.out.println(graduacao);
+		
+		if ( (op == "insert" && (nome == null || nome.isBlank())) || (op =="update" && nome != null && nome.isBlank())) {
+			erros.put("nome", "Nome deve ser preenchido");
+		}
+		if ( (op == "insert" && (descricao == null || descricao.isBlank())) || (op =="update" && descricao != null && descricao.isBlank())) {
+			erros.put("descricao", "Descrição deve ser preenchida");
+		}
+		if ( (op == "insert" && (graduacao == null ||graduacao.isBlank())) || (op =="update" && graduacao != null && graduacao.isBlank())) {
+			erros.put("graduacao", "Graduação deve ser preenchida");
+		}
+				
+		return erros; 
+		
+	}
+
     
 }
