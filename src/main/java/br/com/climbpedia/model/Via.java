@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="vias")
@@ -19,23 +20,30 @@ public class Via {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private String nome;
 	
-	private Long setor;
+	@NotNull
+	@Column(name="setor_id")
+	private Long setorId;
 	
+	@NotNull
 	private String graduacao;
 	
-	private Long tipo;
+	@NotNull
+	@Column(name="tipo_id")
+	private Long tipoId;
 	
 	@Column(name = "url_croqui")
 	private String urlCroqui;
 	
-	@Column(name = "url_img")
-	private String urlImg;
+	@Column(name = "imagem_id")
+	private String imagemId;
 	
 	private String tags;
 	
-	private Long conquistador;
+	@Column(name="conquistador_id")
+	private Long conquistadorId;
 	
 	private String descricao;
 	
@@ -79,19 +87,19 @@ public class Via {
 	}
 	
 	public Long getSetor() {
-		return setor;
+		return setorId;
 	}
 
-	public void setSetor(Long setor) {
-		this.setor = setor;
+	public void setSetor(Long setorId) {
+		this.setorId = setorId;
 	}
 
 	public Long getTipo() {
-		return tipo;
+		return tipoId;
 	}
 
-	public void setTipo(Long tipo) {
-		this.tipo = tipo;
+	public void setTipo(Long tipoId) {
+		this.tipoId = tipoId;
 	}
 
 	public String getUrlCroqui() {
@@ -103,11 +111,11 @@ public class Via {
 	}
 
 	public String getUrlImg() {
-		return urlImg;
+		return imagemId;
 	}
 
-	public void setUrlImg(String urlImg) {
-		this.urlImg = urlImg;
+	public void setUrlImg(String imagemId) {
+		this.imagemId = imagemId;
 	}
 
 	public String getTags() {
@@ -119,11 +127,11 @@ public class Via {
 	}
 
 	public Long getConquistador() {
-		return conquistador;
+		return conquistadorId;
 	}
 
-	public void setConquistador(Long conquistador) {
-		this.conquistador = conquistador;
+	public void setConquistador(Long conquistadorId) {
+		this.conquistadorId = conquistadorId;
 	}
 	
 	@Override

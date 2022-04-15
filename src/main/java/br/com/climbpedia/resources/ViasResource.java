@@ -34,7 +34,7 @@ public class ViasResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getVia(@PathParam("id") Long id) {
+    public Response getViaById(@PathParam("id") Long id) {
     	System.out.println("Recebido Get Via Id "+ id);
     	
     	try {
@@ -73,6 +73,7 @@ public class ViasResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertVia(Via viaRequest) {
+    	System.out.println(viaRequest);
     	HashMap<String, String> erros = (HashMap<String, String>) this.validaCamposObrigatorios(viaRequest, "insert");
     	
     	if (!erros.isEmpty()) {

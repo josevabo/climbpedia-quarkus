@@ -1,13 +1,19 @@
 package br.com.climbpedia.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name="imagens")
 public class Imagem {
 	@Id @GeneratedValue
 	private Long id;
 	
 	private String legenda;
 	
+	@NotNull
 	private String url; 
 }
