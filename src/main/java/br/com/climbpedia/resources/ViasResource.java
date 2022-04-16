@@ -35,7 +35,6 @@ public class ViasResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getViaById(@PathParam("id") Long id) {
-    	System.out.println("Recebido Get Via Id "+ id);
     	
     	try {
     		ViaDAO viaDAO = new ViaDAO(em);
@@ -58,7 +57,6 @@ public class ViasResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getaAllVias() {
-    	System.out.println("Recebido Get All Vias");
 
     	ViaDAO viaDAO = new ViaDAO(em);
         List<Via> allVias = viaDAO.getAllVias();
@@ -73,8 +71,8 @@ public class ViasResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertVia(Via viaRequest) {
-    	System.out.println(viaRequest);
-    	HashMap<String, String> erros = (HashMap<String, String>) this.validaCamposObrigatorios(viaRequest, "insert");
+
+		HashMap<String, String> erros = (HashMap<String, String>) this.validaCamposObrigatorios(viaRequest, "insert");
     	
     	if (!erros.isEmpty()) {
     		Map<String, Map> retorno = new HashMap<String, Map>();
@@ -161,11 +159,9 @@ public class ViasResource {
 		// operacao = "insert" || "update"
 		Map<String, String> erros = new HashMap<String, String>();
 		String nome = via.getNome();
-		System.out.println(nome);
 		String descricao = via.getDescricao();
-		System.out.println(descricao);
 		String graduacao = via.getGraduacao();
-		System.out.println(graduacao);
+
 		
 		if ( (op == "insert" && (nome == null || nome.isBlank())) || (op =="update" && nome != null && nome.isBlank())) {
 			erros.put("nome", "Nome deve ser preenchido");

@@ -1,12 +1,7 @@
 package br.com.climbpedia.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-
 import br.com.climbpedia.model.Via;
 
 public class ViaDAO {
@@ -54,6 +49,4 @@ public class ViaDAO {
 
 		return via;		
 	}
-	
-	
 }
