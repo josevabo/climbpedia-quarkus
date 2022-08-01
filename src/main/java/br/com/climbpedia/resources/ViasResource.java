@@ -22,9 +22,10 @@ import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.Status;
 
 import br.com.climbpedia.dao.ViaDAO;
+import br.com.climbpedia.dto.ViaDTO;
 import br.com.climbpedia.model.Via;
 
-
+//FIXME criar viaDTO, transferir dados de via onde ao inves de passar id da url da imagem , passar url string
 @Path("/vias")
 public class ViasResource {
 		
@@ -176,6 +177,11 @@ public class ViasResource {
 		return erros; 
 		
 	}
+//	
+//	private ViaDTO createViaDTO(Via rawVia) {
+//		String urlImg = Via
+//		return viaDTO;
+//	}
 
     
 }
